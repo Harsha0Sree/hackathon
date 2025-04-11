@@ -1,0 +1,101 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.75rem;
+  }
+
+  body {
+    @apply bg-verdex-background text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom styling for select dropdowns */
+  select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2371DB77" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1em;
+  }
+  
+  select option {
+    @apply bg-verdex-background text-white px-2 py-1;
+  }
+  
+  select:focus {
+    @apply outline-none ring-2 ring-verdex-accent;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20 rounded-xl shadow-lg;
+  }
+  
+  .glass-card {
+    @apply glass p-6 transition-all duration-300 hover:bg-white/15;
+  }
+  
+  .glass-nav {
+    @apply glass sticky top-0 z-50 px-4 py-2 backdrop-blur-lg bg-black/20 border-b border-white/10;
+  }
+  
+  .btn-primary {
+    @apply bg-verdex-accent text-verdex-background font-semibold px-6 py-3 rounded-lg 
+    transition-all duration-300 hover:bg-opacity-90 hover:translate-y-[-2px] 
+    hover:shadow-[0_4px_20px_rgba(113,219,119,0.5)];
+  }
+  
+  .btn-secondary {
+    @apply glass border border-verdex-accent text-verdex-accent font-semibold px-6 py-3 rounded-lg 
+    transition-all duration-300 hover:bg-verdex-accent/10 hover:translate-y-[-2px] 
+    hover:shadow-[0_4px_20px_rgba(113,219,119,0.25)];
+  }
+  
+  .section-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
+  }
+  
+  /* Custom select component styling */
+  .select-container {
+    @apply relative;
+  }
+  
+  .select-styled {
+    @apply glass bg-verdex-background border border-verdex-accent/30 text-white w-full p-3 rounded-lg
+    focus:outline-none focus:ring-2 focus:ring-verdex-accent;
+  }
+}
