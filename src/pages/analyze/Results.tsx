@@ -5,50 +5,157 @@ import GlassButton from '../../components/GlassButton';
 import { BarChart, Car, Lightbulb, Leaf, BarChart3, ArrowRight } from 'lucide-react';
 import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+interface AnalysisPayload {
+  model: string;
+  task: string;
+  file?: string;
+  text?: string;
+  prompt?: string;
+}
+
 // Mock data for AI models
 const aiModels = [
   { 
     id: 'openrouter/optimus-alpha', 
     name: 'Optimus-Alpha',
-    efficiency: 'High',
-    energyPerInference: 0.012,
-    co2PerInference: 5.4,
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'nvidia/llama-3.1-nemotron-nano-8b-v1:free', 
+    name: 'NVIDIA Llama 3.1 Nemotron Nano 8B v1',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'nvidia/llama-3.3-nemotron-super-49b-v1:free', 
+    name: 'NVIDIA Llama 3.3 Nemotron Super 49B v1',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'nvidia/llama-3.1-nemotron-ultra-253b-v1:free', 
+    name: 'NVIDIA Llama 3.1 Nemotron Ultra 253B v1',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'meta-llama/llama-3.3-70b-instruct:free', 
+    name: 'Meta: Llama 3.3 70B Instruct',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'meta-llama/llama-4-scout:free', 
+    name: 'Llama 4 Scout',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'meta-llama/llama-4-maverick:free', 
+    name: 'Llama 4 Maverick',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'meta-llama/llama-3.1-8b-instruct:free', 
+    name: 'Meta Llama 3.1 8B Instruct',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'google/gemma-3-27b-it:free', 
+    name: 'Google Gemma 3 27B',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'google/gemini-2.0-flash-thinking-exp:free', 
+    name: 'Google Gemini 2.0 Flash Experimental',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'google/learnlm-1.5-pro-experimental:free', 
+    name: 'Google LearnLM 1.5 Pro Experimental',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'google/gemini-2.5-pro-exp-03-25:free', 
+    name: 'Google Gemini 2.5 Pro Experimental (03-25)',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'qwen/qwq-32b:free', 
+    name: 'Qwen QWQ 32B',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'qwen/qwen2.5-vl-72b-instruct:free', 
+    name: 'Qwen 2.5 VL 72B Instruct',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'deepseek/deepseek-chat-v3-0324:free', 
+    name: 'Deepseek Chat V3 (0324)',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'deepseek/deepseek-r1:free', 
+    name: 'Deepseek R1',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
   },
   { 
     id: 'model-2', 
-    name: 'EcoTransformer-M',
+    name: 'GPT-4o',
     efficiency: 'Medium',
     energyPerInference: 0.025,
-    co2PerInference: 11.3,
+    co2PerInference: 11.3, 
+  },
+  { 
+    id: 'model-1', 
+    name: 'GPT-4.5',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
   },
   { 
     id: 'model-3', 
-    name: 'EcoTransformer-L',
-    efficiency: 'Low',
-    energyPerInference: 0.065,
-    co2PerInference: 29.3,
+    name: 'GPT-4o-mini',
+    efficiency: 'Medium',
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
   },
   { 
     id: 'model-4', 
-    name: 'Vision-ECO-1',
-    efficiency: 'High',
-    energyPerInference: 0.018,
-    co2PerInference: 8.1,
-  },
-  { 
-    id: 'model-5', 
-    name: 'Vision-ECO-2',
+    name: 'GPT-o3-mini',
     efficiency: 'Medium',
-    energyPerInference: 0.035,
-    co2PerInference: 15.8,
-  },
-  { 
-    id: 'model-6', 
-    name: 'Audio-ECO-1',
-    efficiency: 'Medium',
-    energyPerInference: 0.028,
-    co2PerInference: 12.6,
+    energyPerInference: 0.025,
+    co2PerInference: 11.3, 
   }
+  
 ];
 
 // Helper function to get task name from ID
@@ -78,7 +185,7 @@ const Results = () => {
   const queryParams = new URLSearchParams(location.search);
   const modelId = queryParams.get('model') || '';
   const taskId = queryParams.get('task') || '';
-  const { textInput } = location.state || {};
+  const { model, task, prompt, text, base64Image } = (location.state || {}) as any;
 
   const [selectedModel, setSelectedModel] = useState<any>(null);
   const [comparisonData, setComparisonData] = useState<any[]>([]);
@@ -119,53 +226,51 @@ const Results = () => {
 
   // Hook to fetch API output, conditional logic inside the hook callback
   useEffect(() => {
-    if (textInput && selectedModel) {
-      outputFromSelectedModel(textInput)
-        .then((data) => {
-          // Adjust extraction based on your API response structure
-          const output = data.choices?.[0]?.message?.content || 'No output received from API.';
-          setApiOutput(output);
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [textInput, selectedModel]);
-
-  async function outputFromSelectedModel(textInput: string) {
-    try {
-      const apiKey = import.meta.env.VITE_OPEN_ROUTER_API_KEY;
-      const instruction = `
-You are a concise and detail-oriented assistant. 
-When providing responses, please:
-1. Structure the output clearly in plain text.
-2. Avoid unnecessary markdown formatting like extra asterisks.
-3. Format your answer using simple bullet points or numbered lists when appropriate.
-4. Provide logical and easy-to-understand explanations.
-Please provide your response in plain text only.
-      `.trim();
-      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          // Use the model's ID, not the entire object
-          model: selectedModel ? selectedModel.id : '',
-          messages: [
-            {
-              role: 'user',
-              content: `${instruction}\n\nUser Input: ${textInput}`,
-            },
-          ],
-        }),
+    if (model && prompt && selectedModel) {
+      outputFromSelectedModel().then((data) => {
+        const output = data.choices?.[0]?.message?.content || "No output received from API.";
+        setApiOutput(output);
       });
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      console.log("Error During Fetching", err);
-      throw new Error("Error During Fetching");
     }
+  }, [model, prompt, selectedModel]);
+
+  async function outputFromSelectedModel() {
+    const apiKey = import.meta.env.VITE_OPEN_ROUTER_API_KEY;
+    const instruction = `
+You are a concise and detail-oriented assistant. 
+1. Structure the output clearly in plain text.
+2. Avoid unnecessary markdown formatting.
+3. Use bullet points or numbers.
+4. Explain logically and clearly.
+`.trim();
+
+    const content: any[] = [{ type: "text", text: `${instruction}\n\n${prompt}\n\nUser Input: ${text || "Attached image"}` }];
+    if (base64Image) {
+      content.push({ type: "image_url", image_url: { url: base64Image } });
+    }
+
+    const payload = {
+      model,
+      messages: [
+        {
+          role: "user",
+          content,
+        },
+      ],
+    };
+
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    return data;
   }
+  
 
   // Calculate relatable metrics
   const milesDriven = selectedModel ? (selectedModel.co2PerInference * 0.0024).toFixed(4) : '0.0000';

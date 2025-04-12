@@ -36,7 +36,7 @@ const allModels = [
     name: 'NVIDIA Llama 3.1 Nemotron 70B Instruct',
     description: 'Efficient vision model optimized for basic image classification and object detection',
     efficiency: 'High',
-    tasks: ['Image Recognition'],
+    tasks: ['Image Recognition','Text Generation'],
     type: 'vision',
   },
   { 
@@ -44,7 +44,7 @@ const allModels = [
     name: 'Llama 4 Scout',
     description: 'Advanced vision model with comprehensive recognition capabilities',
     efficiency: 'Medium',
-    tasks: ['Image Recognition'],
+    tasks: ['Image Recognition','Text Generation'],
     type: 'vision',
   },
   { 
@@ -52,7 +52,7 @@ const allModels = [
     name: 'Llama 4 Maverick',
     description: 'Efficient audio processing model for speech-to-text and classification',
     efficiency: 'Medium',
-    tasks: ['Audio Processing'],
+    tasks: ['Audio Processing','Text Generation'],
     type: 'audio',
   },
   { 
@@ -60,7 +60,7 @@ const allModels = [
     name: 'Meta Llama 3.1 8B Instruct',
     description: 'Specialized model for efficient translation across multiple languages',
     efficiency: 'High',
-    tasks: ['Translation'],
+    tasks: ['Translation','Text Generation'],
     type: 'text',
   },
   { 
@@ -68,7 +68,7 @@ const allModels = [
     name: 'Meta Llama 3.3 70B Instruct',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'Medium',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -76,7 +76,7 @@ const allModels = [
     name: 'Google Gemma 3 27B',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'Medium',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -84,7 +84,7 @@ const allModels = [
     name: 'Google Gemini 2.0 Flash Experimental',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'Medium',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -92,7 +92,7 @@ const allModels = [
     name: 'Google LearnLM 1.5 Pro Experimental',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'Medium',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -100,7 +100,7 @@ const allModels = [
     name: 'Google Gemini 2.5 Pro Experimental (03-25)',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -108,7 +108,7 @@ const allModels = [
     name: 'Qwen QWQ 32B',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -116,7 +116,7 @@ const allModels = [
     name: 'Qwen 2.5 VL 72B Instruct',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -124,7 +124,7 @@ const allModels = [
     name: 'Deepseek Chat V3 (0324)',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -132,7 +132,7 @@ const allModels = [
     name: 'Deepseek R1',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -140,7 +140,7 @@ const allModels = [
     name: 'Optimus Alpha',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -148,7 +148,7 @@ const allModels = [
     name: 'GPT-4o',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -156,7 +156,7 @@ const allModels = [
     name: 'GPT-4o-mini',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -164,7 +164,7 @@ const allModels = [
     name: 'GPT-o3-mini',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   },
   { 
@@ -172,7 +172,7 @@ const allModels = [
     name: 'GPT-4.5',
     description: 'Optimized model for conversational AI with reduced environmental impact',
     efficiency: 'High',
-    tasks: ['Conversation'],
+    tasks: ['Conversation','Text Generation'],
     type: 'text',
   }
 ];
