@@ -41,9 +41,13 @@ const Footer = () => {
           </div>
         </div>
         
+<<<<<<< HEAD
         <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-400">
           <p>© {new Date().getFullYear()} Verdex. All rights reserved.</p>
         </div>
+=======
+        
+>>>>>>> temp
       </div>
     </footer>
   );

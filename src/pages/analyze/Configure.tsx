@@ -1,54 +1,175 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import GlassSectionTitle from '../../components/GlassSectionTitle';
 import { Leaf, Upload, Mic } from 'lucide-react';
 
+
+interface AnalysisPayload {
+  model: string;
+  task: string;
+  file?: string;
+  text?: string;
+  prompt?: string;
+}
+
 // Mock data for AI models
 const aiModels = [
   { 
-    id: 'model-1', 
-    name: 'EcoTransformer-S',
+    id: 'openrouter/optimus-alpha', 
+    name: 'Optimus-Alpha',
     description: 'Small, efficient transformer for basic tasks',
     efficiency: 'High',
     energyPerInference: 0.012,
-    supportedTasks: ['creative-writing', 'content-completion', 'language-translation', 'chatbot', 'question-answering'] 
+    supportedTasks: ['creative-writing', 'content-completion', 'language-translation', 'chatbot', 'question-answering', 'image-classification', 'object-detection', 'facial-recognition'] 
   },
   { 
-    id: 'model-2', 
-    name: 'EcoTransformer-M',
+    id: 'nvidia/llama-3.1-nemotron-nano-8b-v1:free', 
+    name: 'NVIDIA Llama 3.1 Nemotron Nano 8B v1',
     description: 'Medium-sized transformer with balanced performance',
     efficiency: 'Medium',
     energyPerInference: 0.025,
     supportedTasks: ['creative-writing', 'content-completion', 'code-generation', 'language-translation', 'technical-translation', 'chatbot', 'question-answering'] 
   },
   { 
-    id: 'model-3', 
-    name: 'EcoTransformer-L',
+    id: 'nvidia/llama-3.3-nemotron-super-49b-v1:free', 
+    name: 'NVIDIA Llama 3.3 Nemotron Super 49B v1',
     description: 'Large transformer with advanced capabilities',
     efficiency: 'Low',
     energyPerInference: 0.065,
     supportedTasks: ['creative-writing', 'content-completion', 'code-generation', 'language-translation', 'technical-translation', 'chatbot', 'question-answering'] 
   },
   { 
-    id: 'model-4', 
-    name: 'Vision-ECO-1',
+    id: 'nvidia/llama-3.1-nemotron-ultra-253b-v1:free', 
+    name: 'NVIDIA Llama 3.1 Nemotron Ultra 253B v1',
     description: 'Efficient vision model for basic classification',
     efficiency: 'High',
     energyPerInference: 0.018,
     supportedTasks: ['image-classification', 'object-detection'] 
   },
   { 
-    id: 'model-5', 
-    name: 'Vision-ECO-2',
+    id: 'meta-llama/llama-3.3-70b-instruct:free', 
+    name: 'Meta: Llama 3.3 70B Instruct ',
     description: 'Advanced vision model with detailed recognition',
     efficiency: 'Medium',
     energyPerInference: 0.035,
     supportedTasks: ['image-classification', 'object-detection', 'facial-recognition'] 
   },
   { 
-    id: 'model-6', 
-    name: 'Audio-ECO-1',
+    id: 'meta-llama/llama-4-scout:free', 
+    name: 'Llama 4 Scout',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'meta-llama/llama-4-maverick:free', 
+    name: 'Llama 4 Maverick',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'meta-llama/llama-3.1-8b-instruct:free', 
+    name: 'Meta Llama 3.1 8B Instruct',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'google/gemma-3-27b-it:free', 
+    name: 'Google Gemma 3 27B',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'google/gemini-2.0-flash-thinking-exp:free', 
+    name: 'Google Gemini 2.0 Flash Experimental',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'google/learnlm-1.5-pro-experimental:free', 
+    name: 'Google LearnLM 1.5 Pro Experimental',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'google/gemini-2.5-pro-exp-03-25:free', 
+    name: 'Google Gemini 2.5 Pro Experimental (03-25)',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'qwen/qwq-32b:free', 
+    name: 'Qwen QWQ 32B',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'qwen/qwen2.5-vl-72b-instruct:free', 
+    name: 'Qwen 2.5 VL 72B Instruct',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'deepseek/deepseek-chat-v3-0324:free', 
+    name: 'Deepseek Chat V3 (0324)',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'deepseek/deepseek-r1:free', 
+    name: 'Deepseek R1',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'model-2', 
+    name: 'GPT-4o',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'model-1', 
+    name: 'GPT-4.5',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'model-3', 
+    name: 'GPT-4o-mini',
+    description: 'Efficient audio processing model',
+    efficiency: 'Medium',
+    energyPerInference: 0.028,
+    supportedTasks: ['speech-to-text', 'audio-classification'] 
+  },
+  { 
+    id: 'model-4', 
+    name: 'GPT-o3-mini',
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
@@ -86,6 +207,15 @@ const isAudioTask = (taskId: string) => {
   return ['speech-to-text', 'audio-classification'].includes(taskId);
 };
 
+const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 const Configure = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -96,6 +226,8 @@ const Configure = () => {
   const [selectedModel, setSelectedModel] = useState('');
   const [sortBy, setSortBy] = useState('efficiency');
   const [filteredModels, setFilteredModels] = useState<typeof aiModels>([]);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null); // State for uploaded file
+  const fileInputRef = useRef<HTMLInputElement>(null); // Ref for file input
   
   useEffect(() => {
     // Filter models that support the selected task
@@ -122,16 +254,56 @@ const Configure = () => {
       setSelectedModel(sortedModels[0].id);
     }
   }, [taskId, sortBy, selectedModel]);
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Generate a unique analysis ID (in a real app, this would be from the server)
-    const analysisId = `analysis-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-    
-    // Redirect to results page with the analysis ID
-    navigate(`/analyze/results/${analysisId}?model=${selectedModel}&task=${taskId}`);
+
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type based on task
+      if (isImageTask(taskId) && !file.type.startsWith('image/')) {
+        alert('Please upload an image file.');
+        return;
+      }
+      if (isAudioTask(taskId) && !file.type.startsWith('audio/')) {
+        alert('Please upload an audio file.');
+        return;
+      }
+      setUploadedFile(file);
+    }
   };
+
+  // Trigger file input click
+  const handleBrowseClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let base64Image = null;
+    if (uploadedFile && isImageTask(taskId)) {
+      base64Image = await fileToBase64(uploadedFile);
+    }
+
+    const prompt = uploadedFile
+      ? `Please perform ${taskId} on the attached ${isImageTask(taskId) ? "image" : "audio"} file.`
+      : "Answer the Above Question.";
+
+    const analysisId = `analysis-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+    navigate(`/analyze/results/${analysisId}?model=${selectedModel}&task=${taskId}`, {
+      state: {
+        model: selectedModel,
+        task: taskId,
+        prompt,
+        text: textInput,
+        base64Image,
+      },
+    });
+  };
+
+  
+  
   
   // Get EfficencyIcon based on the rating
   const EfficiencyIcon = ({ rating }: { rating: string }) => {
@@ -170,7 +342,14 @@ const Configure = () => {
                       <div className="glass bg-white/5 border-2 border-dashed border-gray-500 rounded-lg p-8 text-center">
                         <Upload className="h-10 w-10 text-gray-400 mx-auto mb-4" />
                         <p className="text-gray-400 mb-2">Drag & drop an image or click to browse</p>
-                        <button type="button" className="btn-secondary text-sm py-2">Browse Files</button>
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="hin"
+                        />
+                        {/* <button type="button" className="btn-secondary text-sm py-2" onClick={handleBrowseClick}>Browse Files</button> */}
                       </div>
                     </div>
                   ) : isAudioTask(taskId) ? (
@@ -179,10 +358,20 @@ const Configure = () => {
                       <div className="glass bg-white/5 border-2 border-dashed border-gray-500 rounded-lg p-8 text-center">
                         <Mic className="h-10 w-10 text-gray-400 mx-auto mb-4" />
                         <p className="text-gray-400 mb-2">Drag & drop an audio file or click to browse</p>
-                        <button type="button" className="btn-secondary text-sm py-2">Browse Files</button>
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          accept="audio/*"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                          
+                        <button type="button" className="btn-secondary text-sm py-2" onClick={handleBrowseClick}>Browse Files</button>
+                        
                       </div>
                     </div>
                   ) : (
+                    
                     <div className="mb-6">
                       <label htmlFor="textInput" className="block text-gray-300 mb-2">Text Input</label>
                       <textarea

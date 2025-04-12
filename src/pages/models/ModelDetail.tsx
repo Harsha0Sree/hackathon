@@ -224,11 +224,7 @@ interface AIModel {
   co2PerInference: number;
   parameters: string;
   trainingEmissions: string;
-  hardware: {
-    recommended: string;
-    minimumMemory: string;
-    optimizedFor: string;
-  };
+  
   capabilities: string[];
 }
 
@@ -366,7 +362,6 @@ const ModelDetail = () => {
                     <Cpu className="h-5 w-5 text-verdex-accent mr-3 mt-1" />
                     <div>
                       <h3 className="font-semibold mb-1">Recommended Hardware</h3>
-                      <p className="text-gray-300">{model.hardware.recommended}</p>
                     </div>
                   </div>
                 </div>
@@ -376,7 +371,6 @@ const ModelDetail = () => {
                     <Database className="h-5 w-5 text-verdex-accent mr-3 mt-1" />
                     <div>
                       <h3 className="font-semibold mb-1">Minimum Memory</h3>
-                      <p className="text-gray-300">{model.hardware.minimumMemory}</p>
                     </div>
                   </div>
                 </div>
@@ -386,7 +380,6 @@ const ModelDetail = () => {
                     <Leaf className="h-5 w-5 text-verdex-accent mr-3 mt-1" />
                     <div>
                       <h3 className="font-semibold mb-1">Optimization Focus</h3>
-                      <p className="text-gray-300">{model.hardware.optimizedFor}</p>
                     </div>
                   </div>
                 </div>
