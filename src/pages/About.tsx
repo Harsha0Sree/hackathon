@@ -7,24 +7,21 @@ const About = () => {
   // Team members (placeholder)
   const teamMembers = [
     {
-      name: 'Alex Rivera',
-      role: 'CEO & Co-Founder',
-      bio: 'Environmental engineer with a passion for sustainable technology and AI ethics.'
+      name: 'Madhuri',
+      role: 'Team Lead',
+        },
+    {
+      name: 'Harsha',
+      role: 'Member'
+       },
+    {
+      name: 'Durga',
+      role: 'Member',
+      
     },
     {
-      name: 'Dr. Maya Chen',
-      role: 'CTO & Co-Founder',
-      bio: 'Former AI researcher with expertise in energy-efficient deep learning architectures.'
-    },
-    {
-      name: 'Sam Okonkwo',
-      role: 'Lead Data Scientist',
-      bio: 'Specializes in measuring and optimizing the carbon footprint of computational systems.'
-    },
-    {
-      name: 'Olivia Kim',
-      role: 'Head of Sustainability',
-      bio: 'Advocate for responsible AI with background in environmental policy and carbon markets.'
+      name: 'Sonali',
+      role: 'Member',
     }
   ];
   
@@ -91,7 +88,7 @@ const About = () => {
                     </div>
                     <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
                     <p className="text-verdex-accent mb-3">{member.role}</p>
-                    <p className="text-gray-300">{member.bio}</p>
+                    
                   </div>
                 </div>
               ))}

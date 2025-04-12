@@ -45,7 +45,7 @@ const aiModels = [
     description: 'Efficient vision model for basic classification',
     efficiency: 'High',
     energyPerInference: 0.018,
-    supportedTasks: ['image-classification', 'object-detection'] 
+    supportedTasks: ['creative-writing', 'content-completion', 'code-generation'] 
   },
   { 
     id: 'meta-llama/llama-3.3-70b-instruct:free', 
@@ -53,7 +53,7 @@ const aiModels = [
     description: 'Advanced vision model with detailed recognition',
     efficiency: 'Medium',
     energyPerInference: 0.035,
-    supportedTasks: ['image-classification', 'object-detection', 'facial-recognition'] 
+    supportedTasks: ['creative-writing', 'content-completion', 'code-generation'] 
   },
   { 
     id: 'meta-llama/llama-4-scout:free', 
@@ -61,7 +61,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion','image-classification', 'object-detection', 'facial-recognition'] 
   },
   { 
     id: 'meta-llama/llama-4-maverick:free', 
@@ -69,7 +69,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion','image-classification', 'object-detection', 'facial-recognition'] 
   },
   { 
     id: 'meta-llama/llama-3.1-8b-instruct:free', 
@@ -77,7 +77,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['speech-to-text','creative-writing', 'content-completion',] 
   },
   { 
     id: 'google/gemma-3-27b-it:free', 
@@ -85,7 +85,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion','image-classification', 'object-detection', 'facial-recognition'] 
   },
   { 
     id: 'google/gemini-2.0-flash-thinking-exp:free', 
@@ -93,7 +93,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion','image-classification', 'object-detection', 'facial-recognition']  
   },
   { 
     id: 'google/learnlm-1.5-pro-experimental:free', 
@@ -101,7 +101,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion','image-classification', 'object-detection', 'facial-recognition']  
   },
   { 
     id: 'google/gemini-2.5-pro-exp-03-25:free', 
@@ -109,7 +109,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion','image-classification', 'object-detection', 'facial-recognition']  
   },
   { 
     id: 'qwen/qwq-32b:free', 
@@ -117,7 +117,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['speech-to-text', 'creative-writing', 'content-completion', 'code-generation','image-classification', 'object-detection', 'facial-recognition' ]
   },
   { 
     id: 'qwen/qwen2.5-vl-72b-instruct:free', 
@@ -125,7 +125,7 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['speech-to-text', 'creative-writing', 'content-completion', 'code-generation','image-classification', 'object-detection', 'facial-recognition' ]
   },
   { 
     id: 'deepseek/deepseek-chat-v3-0324:free', 
@@ -133,52 +133,18 @@ const aiModels = [
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion', 'code-generation'] 
   },
+
   { 
     id: 'deepseek/deepseek-r1:free', 
     name: 'Deepseek R1',
     description: 'Efficient audio processing model',
     efficiency: 'Medium',
     energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
-  },
-  { 
-    id: 'model-2', 
-    name: 'GPT-4o',
-    description: 'Efficient audio processing model',
-    efficiency: 'Medium',
-    energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
-  },
-  { 
-    id: 'model-1', 
-    name: 'GPT-4.5',
-    description: 'Efficient audio processing model',
-    efficiency: 'Medium',
-    energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
-  },
-  { 
-    id: 'model-3', 
-    name: 'GPT-4o-mini',
-    description: 'Efficient audio processing model',
-    efficiency: 'Medium',
-    energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
-  },
-  { 
-    id: 'model-4', 
-    name: 'GPT-o3-mini',
-    description: 'Efficient audio processing model',
-    efficiency: 'Medium',
-    energyPerInference: 0.028,
-    supportedTasks: ['speech-to-text', 'audio-classification'] 
+    supportedTasks: ['creative-writing', 'content-completion', 'code-generation'] 
   }
 ];
-
-const [tokenCount, setTokenCount] = useState(0);
-
 
 // Helper function to get task name from ID
 const getTaskName = (taskId: string) => {
@@ -226,11 +192,18 @@ const Configure = () => {
   const taskId = queryParams.get('task') || '';
   
   const [textInput, setTextInput] = useState('');
+  const [tokenCount, setTokenCount] = useState(0);
   const [selectedModel, setSelectedModel] = useState('');
   const [sortBy, setSortBy] = useState('efficiency');
   const [filteredModels, setFilteredModels] = useState<typeof aiModels>([]);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null); // State for uploaded file
   const fileInputRef = useRef<HTMLInputElement>(null); // Ref for file input
+
+  useEffect(() => {
+    const trimmedInput = textInput.trim();
+    const tokens = trimmedInput ? trimmedInput.split(/\s+/) : [];
+    setTokenCount(tokens.length);
+  }, [textInput]);
   
   useEffect(() => {
     // Filter models that support the selected task
@@ -384,6 +357,9 @@ const Configure = () => {
                         value={textInput}
                         onChange={(e) => setTextInput(e.target.value)}
                       ></textarea>
+                      <div className="text-sm text-gray-400 mt-2">
+                        Estimated Tokens: <span className="text-white font-semibold">{tokenCount}</span>
+                      </div>
                     </div>
                   )}
                   

@@ -141,35 +141,7 @@ const aiModels = [
     efficiency: "Medium",
     energyPerInference: 0.025,
     co2PerInference: 11.3,
-  },
-  {
-    id: "model-2",
-    name: "GPT-4o",
-    efficiency: "Medium",
-    energyPerInference: 0.025,
-    co2PerInference: 11.3,
-  },
-  {
-    id: "model-1",
-    name: "GPT-4.5",
-    efficiency: "Medium",
-    energyPerInference: 0.025,
-    co2PerInference: 11.3,
-  },
-  {
-    id: "model-3",
-    name: "GPT-4o-mini",
-    efficiency: "Medium",
-    energyPerInference: 0.025,
-    co2PerInference: 11.3,
-  },
-  {
-    id: "model-4",
-    name: "GPT-o3-mini",
-    efficiency: "Medium",
-    energyPerInference: 0.025,
-    co2PerInference: 11.3,
-  },
+  }
 ];
 
 // Helper function to get task name from ID
@@ -206,6 +178,7 @@ const Results = () => {
   const [comparisonData, setComparisonData] = useState<any[]>([]);
   const [alternativeModels, setAlternativeModels] = useState<any[]>([]);
   const [apiOutput, setApiOutput] = useState<string>("");
+  const [outputTokenCount, setOutputTokenCount] = useState(0);
 
   // Hook to find the selected model and prepare comparison data
   useEffect(() => {
@@ -247,16 +220,61 @@ const Results = () => {
     }
   }, [modelId]);
 
+
+
   // Hook to fetch API output, conditional logic inside the hook callback
+  // CHANGE: Modified to calculate API response time and log it to console
+  // - Added async function inside useEffect to handle async/await
+  // - Recorded start time before API call and end time after
+  // - Calculated duration in seconds and logged to console
+  // - Added try-catch for error handling (improves robustness)
   useEffect(() => {
     if (model && prompt && selectedModel) {
-      outputFromSelectedModel().then((data) => {
-        const output =
-          data.choices?.[0]?.message?.content || "No output received from API.";
-        setApiOutput(output);
-      });
+      const fetchOutput = async () => {
+        const startTime = Date.now(); // Record start time before API call
+        try {
+          const data = await outputFromSelectedModel();
+          const endTime = Date.now(); // Record end time after API call
+          const duration = (endTime - startTime) / 1000; // Calculate duration in seconds
+          console.log(`API response time: ${duration.toFixed(2)} seconds`); // Log to console only
+          const output =
+            data.choices?.[0]?.message?.content || "No output received from API.";
+          setApiOutput(output);
+        } catch (error) {
+          console.error("Error fetching output:", error);
+          setApiOutput("Failed to fetch output. Please try again.");
+        }
+      };
+      fetchOutput();
     }
   }, [model, prompt, selectedModel]);
+
+  useEffect(() => {
+    const trimmedOutput = apiOutput.trim();
+    const tokens = trimmedOutput ? trimmedOutput.split(/\s+/) : [];
+    setOutputTokenCount(tokens.length);
+  }, [apiOutput]);
+
+  useEffect(() => {
+    const inputTokenCount = text ? text.trim().split(/\s+/).length : 0;
+  
+    // Avoid running if outputTokenCount is not set yet
+    if (!outputTokenCount || outputTokenCount === 0) return;
+  
+    const totalTokens = inputTokenCount + outputTokenCount;
+  
+    console.log("Total tokens used:", totalTokens);
+  
+    const currentLog = {
+      timestamp: Date.now(),
+      modelId,
+      taskId,
+      totalTokens,
+    };
+  
+    localStorage.setItem("tokenLog", JSON.stringify(currentLog));
+  }, [outputTokenCount]);
+
 
   async function outputFromSelectedModel() {
     const apiKey = import.meta.env.VITE_OPEN_ROUTER_API_KEY;
@@ -354,6 +372,12 @@ You are a concise and detail-oriented assistant.
                 {apiOutput}
               </pre>
             </div>
+            {/* <-- CHANGE: Display the token count underneath the output display */}
+            <div className="mt-2 text-sm text-gray-400">
+              Estimated Tokens:{" "}
+              <span className="text-white font-semibold">{outputTokenCount}</span>
+            </div>
+            {/* <-- END OF TOKEN DISPLAY SECTION */}
           </div>
 
           {/* Environmental Metrics */}

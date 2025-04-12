@@ -142,38 +142,6 @@ const allModels = [
     efficiency: 'High',
     tasks: ['Conversation','Text Generation'],
     type: 'text',
-  },
-  { 
-    id: 'model-18', 
-    name: 'GPT-4o',
-    description: 'Optimized model for conversational AI with reduced environmental impact',
-    efficiency: 'High',
-    tasks: ['Conversation','Text Generation'],
-    type: 'text',
-  },
-  { 
-    id: 'model-19', 
-    name: 'GPT-4o-mini',
-    description: 'Optimized model for conversational AI with reduced environmental impact',
-    efficiency: 'High',
-    tasks: ['Conversation','Text Generation'],
-    type: 'text',
-  },
-  { 
-    id: 'model-20', 
-    name: 'GPT-o3-mini',
-    description: 'Optimized model for conversational AI with reduced environmental impact',
-    efficiency: 'High',
-    tasks: ['Conversation','Text Generation'],
-    type: 'text',
-  },
-  { 
-    id: 'model-21', 
-    name: 'GPT-4.5',
-    description: 'Optimized model for conversational AI with reduced environmental impact',
-    efficiency: 'High',
-    tasks: ['Conversation','Text Generation'],
-    type: 'text',
   }
 ];
 
