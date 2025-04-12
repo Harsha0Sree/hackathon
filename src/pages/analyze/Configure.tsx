@@ -177,6 +177,9 @@ const aiModels = [
   }
 ];
 
+const [tokenCount, setTokenCount] = useState(0);
+
+
 // Helper function to get task name from ID
 const getTaskName = (taskId: string) => {
   const taskNames: {[key: string]: string} = {
