@@ -1,4 +1,5 @@
 # 🌿 Verdex – AI Energy Transparency Platform
+#SUSHACKS 2024
 
 *Verdex* is a web-based transparency tool that helps users understand the *energy consumption* and *environmental impact* of AI models. Built entirely with *React, **TypeScript, **HTML, and **CSS*, it empowers users to make greener AI choices through real-time insights and comparisons.
 
