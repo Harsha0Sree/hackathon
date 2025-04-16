@@ -27,7 +27,7 @@ const aiModels = [
     id: 'nvidia/llama-3.1-nemotron-nano-8b-v1:free', 
     name: 'NVIDIA Llama 3.1 Nemotron Nano 8B v1',
     description: 'Medium-sized transformer with balanced performance',
-    efficiency: 'Medium',
+    efficiency: 'High',
     energyPerInference: 0.025,
     supportedTasks: ['creative-writing', 'content-completion', 'code-generation', 'language-translation', 'technical-translation', 'chatbot', 'question-answering'] 
   },
@@ -35,7 +35,7 @@ const aiModels = [
     id: 'nvidia/llama-3.3-nemotron-super-49b-v1:free', 
     name: 'NVIDIA Llama 3.3 Nemotron Super 49B v1',
     description: 'Large transformer with advanced capabilities',
-    efficiency: 'Low',
+    efficiency: 'Medium',
     energyPerInference: 0.065,
     supportedTasks: ['creative-writing', 'content-completion', 'code-generation', 'language-translation', 'technical-translation', 'chatbot', 'question-answering'] 
   },
@@ -43,7 +43,7 @@ const aiModels = [
     id: 'nvidia/llama-3.1-nemotron-ultra-253b-v1:free', 
     name: 'NVIDIA Llama 3.1 Nemotron Ultra 253B v1',
     description: 'Efficient vision model for basic classification',
-    efficiency: 'High',
+    efficiency: 'Low',
     energyPerInference: 0.018,
     supportedTasks: ['creative-writing', 'content-completion', 'code-generation'] 
   },
